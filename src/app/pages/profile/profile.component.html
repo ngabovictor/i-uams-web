@@ -1,0 +1,250 @@
+<div class="container">
+
+    <div fxLayout="row">
+        <div fxFlex="80">
+            <div fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="20" fxFlex.xs="10"></div>
+                <div fxFlex="60" fxFlex.xs="90">
+                    <h1 [align]="'center'">Personal information</h1>
+                    <p [align]="'center'" class="color-gray">Personal info and options to manage it. You can make
+                        changes to some of this
+                        info, like your contact details. You can also see a summary of your profiles.</p>
+                </div>
+                <div fxFlex="20" fxFlex.xs="10"></div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div fxLayout="row">
+        <div fxFlex="80">
+            <mat-card class="custom-card">
+                <mat-card-header>
+                    <mat-card-title class="color-primary">Basic info</mat-card-title>
+                    <mat-card-subtitle>
+                        Manage your basic information
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item>
+                            <span class="color-primary item-name">Photo</span>
+                            <mat-line class="color-gray">Profile photo helps you personalize your account</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <br>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Name</span>
+                            <mat-line class="{{ profile.first_name ? 'item-value' : 'color-warn'}}">{{profile.first_name
+                                ? profile.first_name : 'Not set'}} {{profile.last_name ? profile.last_name : ''}}
+                            </mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Birthdate</span>
+                            <mat-line class="{{ profile.birthdate ? 'item-value' : 'color-warn'}}">{{profile.birthdate ?
+                                profile.birthdate : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Gender</span>
+                            <mat-line class="{{ profile.gender ? 'item-value' : 'color-warn'}}">{{profile.gender ?
+                                profile.gender : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Marital status</span>
+                            <mat-line class="{{ profile.marital_status ? 'item-value' : 'color-warn'}}">
+                                {{profile.marital_status ? profile.marital_status : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Nationality</span>
+                            <mat-line class="{{ profile.nationality ? 'item-value' : 'color-warn'}}">
+                                {{profile.nationality ? profile.nationality : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+
+            <br>
+
+
+            <mat-card class="custom-card">
+                <mat-card-header>
+                    <mat-card-title class="color-primary">Contact information</mat-card-title>
+                    <mat-card-subtitle>
+                        Manage your contact information
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-list>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Email</span>
+                            <mat-line class="{{ profile.email ? 'item-value' : 'color-warn'}}">{{profile.email ?
+                                profile.email : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Phone number</span>
+                            <mat-line class="{{ profile.phone_number ? 'item-value' : 'color-warn'}}">
+                                {{profile.phone_number ? profile.phone_number : 'Not set'}}</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+
+            <br>
+
+            <div fxLayout="row" fxLayout.xs="column">
+                <div fxFlex="47.5" fxFlex.xs="100">
+                    <mat-card class="custom-card">
+                        <mat-card-header>
+                            <mat-card-title class="color-primary">Account verification</mat-card-title>
+                            <mat-card-subtitle>Account verification is needed for account security</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div [ngSwitch]="profile.verification_status">
+                                <div *ngSwitchCase="'VERIFIED'">
+                                    <p [align]="'center'">
+                                        <mat-icon class="color-primary">
+                                            verified</mat-icon>
+                                        <br>
+                                        Your account is verified
+                                    </p>
+                                </div>
+
+                                <div *ngSwitchCase="'PENDING VERIFICATION'">
+                                    <p [align]="'center'">
+                                        <mat-icon class="color-accent">
+                                            pending</mat-icon>
+                                        <br>
+                                        Account verification is pending
+                                    </p>
+                                </div>
+                                <div *ngSwitchDefault>
+                                    <p [align]="'center'">
+                                        <mat-icon class="color-warn">
+                                            highlight_off</mat-icon>
+                                        <br>
+                                        Your account is not verified
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </mat-card-content>
+
+                        <mat-card-actions *ngIf="profile.verification_status == 'UNVERIFIED'">
+                            <mat-divider></mat-divider>
+                            <button mat-button class="color-primary action-btn">Start account verification</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+                <div fxFlex="5" fxFlex.xs="0"></div>
+                <div fxFlex="47.5" fxFlex.xs="100">
+                    <mat-card class="custom-card">
+                        <mat-card-header>
+                            <mat-card-title class="color-primary">Email verification</mat-card-title>
+                            <mat-card-subtitle>Email verification is needed to access magic link feature
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="{{profile.is_email_verified ? '' : 'color-warn'}}" [align]="'center'">
+                                <mat-icon class="{{profile.is_email_verified ? 'color-primary' : 'color-warn'}}">
+                                    {{profile.is_email_verified ? 'mark_email_read' : 'highlight_off'}}</mat-icon>
+                                <br>
+                                Email is {{profile.is_email_verified ? '' : 'not'}} verified
+                            </p>
+                        </mat-card-content>
+
+                        <mat-card-actions *ngIf="!profile.is_email_verified">
+                            <mat-divider></mat-divider>
+                            <button mat-button class="color-primary action-btn">Verifiy your email</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+
+            <br>
+
+
+            <mat-card class="custom-card">
+                <mat-card-header>
+                    <mat-card-title class="color-primary">Security</mat-card-title>
+                    <mat-card-subtitle>
+                        Keep your account safe
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-list>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Account type</span>
+                            <mat-line>
+                                <span class="custom-chip"
+                                    [ngStyle]="{'background-color': profile.is_staff ? '#28a08242' : '#ffc24433'}">
+                                    {{profile.is_staff ? 'Admin' : 'Regular'}}
+                                </span>
+                            </mat-line>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                            <span class="color-primary item-name">Password</span>
+                            <mat-line class="item-value">********</mat-line>
+                            <span class="spacer"></span>
+                            <button mat-icon-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

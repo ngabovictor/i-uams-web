@@ -35,5 +35,221 @@ $uams-web-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+
+
+html,
+body {
+  min-height: 100%;
+  color: #1a202e !important;
+  background: #ffffff;
+}
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+.theme-switch-item {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.light-theme-indicator {
+  background: #ffffff;
+  border: 2px #1f71a8 solid;
+}
+
+.dark-theme-indicator {
+  background: #15202a;
+  border: 2px #1f71a8 solid;
+}
+
+.lang-switch-item {
+  background: none !important;
+  border: none !important;
+}
+
+.lang-switch-item > img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  padding: 15px;
+}
+
+.img-fluid {
+  min-width: 100%;
+  height: auto;
+}
+
+.loading-indicator {
+  margin: auto;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.custom-card {
+  border: 1px solid rgba($color: #dadce0, $alpha: 0.3);
+  border: 1px solid rgba($color: #232b3e, $alpha: 0.3);
+  border-radius: 8px;
+  box-shadow: none !important;
+  background: #ffffff !important;
+  margin-top: 20px;
+}
+
+.custom-bg {
+  background: #ffffff !important;
+}
+
+mat-form-field {
+  display: inline !important;
+}
+
+mat-toolbar {
+  z-index: 9999 !important;
+}
+
+.fab-right {
+  position: fixed !important;
+  bottom: 0 !important;
+  margin: 32px !important;
+  float: right !important;
+  right: 0 !important;
+}
+
+.fab-left {
+  position: fixed !important;
+  bottom: 0 !important;
+  margin: 32px !important;
+  float: left !important;
+  left: 0 !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.color-accent {
+  color: #ffc244 !important;
+}
+
+.color-primary {
+  color: #00a082!important;
+}
+
+.load-more-btn {
+  margin-top: 50px !important;
+  margin-left: 45% !important;
+}
+
+.retry-btn {
+  margin: 5px 45%;
+}
+
+.color-green {
+  color: #00a082;
+}
+
+.color-white {
+  color: #ffffff !important;
+}
+
+.color-warn {
+  color: #f44336;
+}
+.background-primary {
+  background-color: #ffc244;
+}
+.background-green {
+  background-color: #00a082;
+}
+
+.background-red {
+  background-color: #842525;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fab-text {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.global-progress {
+  margin-top: 64px !important;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.full-height {
+  min-height: 100%;
+}
+
+.custom-flat-btn {
+  border-radius: 0 !important;
+  font-weight: lighter !important;
+  margin: 10px;
+}
+
+.custom-form-field {
+  display: inline-block !important;
+  margin: 5px !important;
+}
+button {
+  margin-right: 5px !important;
+}
+.add-fab-right {
+  position: fixed !important;
+  bottom: 0 !important;
+  margin: 32px !important;
+  float: right !important;
+  right: 0 !important;
+}
+.back-left {
+  position: fixed !important;
+  z-index: 999 !important;
+}
+.center {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.clear {
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.accent-snackbar {
+  background-color: #ffc244;
+}
+
+.custom-chip {
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: auto 5px;
+}
+.spacer {
+  flex: 1 1 auto;
+}

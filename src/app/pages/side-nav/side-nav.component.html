@@ -1,0 +1,52 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+
+    <!-- <div class="nav-header-container">
+    <mat-card class="custom-card">
+      <mat-card-header>
+        <img
+          src="./assets/logo.png"
+          class="logo"
+          alt=""
+          *ngIf="profile.profile_photo"
+        />
+        <div *ngIf="!profile.profile_photo" class="logo-icon-holder">
+          <mat-icon class="logo-icon">person_outline</mat-icon>
+        </div>
+      </mat-card-header>
+      <mat-card-content class="header">
+              <h3>{{profile.first_name}} {{profile.last_name}}</h3>
+              <p class="username">
+                {{profile.phone_number}}
+                <br>
+                {{profile.email}}
+              </p>
+    
+              <br>
+    
+              <button mat-raised-button color="warn" (click)="logout()">Logout</button>  
+            </mat-card-content>
+    </mat-card>
+  </div> -->
+
+
+    <mat-nav-list>
+      <a mat-list-item class="nav-link color-warn" routerLink="/stats/reports"
+        ><mat-icon class="nav-icon">exit_to_app</mat-icon> Logout</a
+      > 
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <div class="data-content">
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

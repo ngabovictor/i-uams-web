@@ -1,0 +1,155 @@
+<div class="container" fxLayout="row" fxLayoutAlign="space-around center">
+    <div fxFlex="27.5" fxFlex.xs="10"></div>
+    <div class="login-card-container" fxFlex="45" fxFlex.xs="80">
+      <mat-progress-bar
+        mode="indeterminate"
+        color="primary"
+        *ngIf="isLoading"
+      ></mat-progress-bar>
+  
+      <mat-card class="custom-card">
+
+        <div [ngSwitch]="usingMagincLinkAuth">
+            <div *ngSwitchCase="true">
+
+                <mat-card-header>
+                    <br />
+                    <mat-card-title align="center">Login with magic link</mat-card-title>
+                    <mat-card-subtitle>{{ magicLinkSent ? 'Login link has been sent!' : 'Enter your email address and we do the magic!'}}</mat-card-subtitle>
+                </mat-card-header>
+            </div>
+            <div *ngSwitchDefault>
+
+
+        <mat-card-header>
+            <br />
+            <mat-card-title align="center">Login</mat-card-title>
+            <mat-card-subtitle>to continue with UAMS</mat-card-subtitle>
+          </mat-card-header>
+            </div>
+        </div>
+        <br /><br />
+
+        <div [ngSwitch]="usingMagincLinkAuth">
+            <div *ngSwitchCase="false">
+
+                <!-- NORMAL AUTH -->
+
+                <mat-card-content>
+
+
+
+                    <mat-stepper [linear]="true" #stepper (selectionChange)="stepSelectionChange($event)">
+                        <mat-step [stepControl]="usernameForm" label="Verify your username">
+                            <br>
+                          <form [formGroup]="usernameForm">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Email or Phone number</mat-label>
+                              <input matInput placeholder="+2507xxxxxxxx" formControlName="username" required>
+                            </mat-form-field>
+                          </form>
+                        </mat-step>
+                        <mat-step [stepControl]="otpForm" label="OTP Verification">
+                            <br>
+                          <form [formGroup]="otpForm">
+                            
+                              <mat-label>Enter OTP sent to your account</mat-label>
+                              <br>
+                              <ng-otp-input  [formCtrl]="otpControl"  [config]="{length:6}"></ng-otp-input>
+                            
+                          </form>
+                        </mat-step>
+                        <mat-step [stepControl]="passwordForm" label="Password">
+                            <br>
+                            <form [formGroup]="passwordForm">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Password</mat-label>
+                                  <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password" required>
+                                  <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{
+                                    passwordHide ? "visibility_off" : "visibility"
+                                  }}</mat-icon>
+                                </mat-form-field>
+                              </form>
+        
+                              <button mat-button class="forgot-btn color-warn" [disabled]="isLoading">
+                                Forgot password?
+                              </button>
+                        </mat-step>
+                      </mat-stepper>
+          
+                </mat-card-content>
+            </div>
+            <div *ngSwitchDefault>
+                <mat-card-content>
+
+                    <p [align]="'center'" *ngIf="magicLinkSent">
+                        <mat-icon class="color-primary mail-info-icon">mail_outline</mat-icon>
+                        <br>
+                        <b>Check your mailbox for the login link.</b>
+                    </p>
+
+                    <form [formGroup]="emailForm" *ngIf="!magicLinkSent">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Email address</mat-label>
+                          <input type="email" matInput formControlName="email" required>
+                        </mat-form-field>
+                      </form>
+
+                    
+                </mat-card-content>
+            </div>
+        </div>
+
+
+        <mat-card-actions>
+            <div class="actions">
+                <div [ngSwitch]="usingMagincLinkAuth">
+                    <div *ngSwitchCase="true">
+                        <button
+                        *ngIf="!magicLinkSent"
+                            mat-flat-button
+                            class="login-btn"
+                            [disabled]="isLoading"
+                            (click)="getMagicLink()"
+                            color="primary"
+                            >
+                            Get the link
+                        </button>
+                    </div>
+                    <div *ngSwitchDefault>
+                        <button
+                            mat-flat-button
+                            class="login-btn"
+                            [disabled]="isLoading"
+                            (click)="goToNextStep()"
+                            color="primary"
+                            >
+                            <div [ngSwitch]="currenctStepIndex">
+                                <div *ngSwitchCase="0">Send OTP</div>
+                                <div *ngSwitchCase="1">Verify OTP</div>
+                                <div *ngSwitchCase="2">Login</div>
+                                <div *ngSwitchDefault></div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <button mat-button class="forgot-btn color-primary" [disabled]="isLoading" (click)="usingMagincLinkAuth = !usingMagincLinkAuth">
+                  {{usingMagincLinkAuth ? 'Login with username and password' : 'Login with magic link'}}
+                </button>
+              </div>
+        </mat-card-actions>
+  
+      </mat-card>
+  
+      <br />
+  
+      <div class="footer-container">
+        <p class="copyright-text">
+          &copy;UAMS {{ today.getFullYear() }}
+          <a href="#" target="_tab" class="root">Powered by<b> Victor NH</b> </a>
+        </p>
+      </div>
+    </div>
+    <div fxFlex="27.5" fxFlex.xs="10"></div>
+  </div>
+  
