@@ -253,3 +253,7 @@ button {
 .spacer {
   flex: 1 1 auto;
 }
+
+.mat-list-item, .mat-card, .mat-typography {
+  font-family: "Nunito", sans-serif !important;
+}
