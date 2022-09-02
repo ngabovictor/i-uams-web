@@ -16,6 +16,13 @@ import { MaterialsModule } from './materials/materials.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginLinkAuthComponent } from './pages/login-link-auth/login-link-auth.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SelectionTypeDialogComponent } from './dialogs/selection-type-dialog/selection-type-dialog.component';
+import { TextTypeDialogComponent } from './dialogs/text-type-dialog/text-type-dialog.component';
+import { FilesTypeDialogComponent } from './dialogs/files-type-dialog/files-type-dialog.component';
+import { EmailVerificationDialogComponent } from './dialogs/email-verification-dialog/email-verification-dialog.component';
+import { PasswordChangeDialogComponent } from './dialogs/password-change-dialog/password-change-dialog.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +30,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SideNavComponent,
     LoginComponent,
     LoginLinkAuthComponent,
-    ProfileComponent
+    ProfileComponent,
+    SelectionTypeDialogComponent,
+    TextTypeDialogComponent,
+    FilesTypeDialogComponent,
+    EmailVerificationDialogComponent,
+    PasswordChangeDialogComponent,
+    RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,25 +1,21 @@
-import { ApiService } from './../../services/api.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { MatStepper } from '@angular/material/stepper';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class LoginComponent implements OnInit {
-  @ViewChild(MatStepper) stepper!: MatStepper;
+export class ResetPasswordComponent implements OnInit {
 
+  @ViewChild(MatStepper) stepper!: MatStepper;
+  
   today = new Date();
   passwordHide = true;
   usernameForm: FormGroup;
@@ -71,16 +67,6 @@ export class LoginComponent implements OnInit {
     return this.otpForm.get('code') as FormControl;
   }
 
-  disableForm() {
-    // this.loginForm.get('username')?.disable();
-    // this.loginForm.get('password')?.disable();
-  }
-
-  enableForm() {
-    // this.loginForm.get('username')?.enable();
-    // this.loginForm.get('password')?.enable();
-  }
-
   stepSelectionChange($event: StepperSelectionEvent): void {
     this.currenctStepIndex = $event.selectedIndex;
   }
@@ -96,42 +82,12 @@ export class LoginComponent implements OnInit {
         break;
 
       case 2:
-        this.login();
+        this.setPassword();
         break;
 
       default:
         break;
     }
-  }
-
-  getMagicLink(): void {
-    if (!this.emailForm.valid) {
-      return;
-    }
-
-    this.isLoading = true;
-
-    const data = this.emailForm.value;
-
-    this.api.post('auth/generate-magic-link', data).subscribe(
-      (response: any) => {
-        this.isLoading = false;
-        this.magicLinkSent = true;
-      },
-      (error: any) => {
-        console.log(error);
-        this.isLoading = false;
-
-        try {
-          this.snackbar.open(error.detail, 'Dismiss', {
-            duration: 3000,
-            panelClass: ['blue-snackbar'],
-          });
-        } catch (error) {
-          this.snackbar.open('Network error', 'RETRY');
-        }
-      }
-    );
   }
 
   requestOtp(): void {
@@ -182,7 +138,6 @@ export class LoginComponent implements OnInit {
         this.stepper.next();
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
         this.isLoading = false;
 
         try {
@@ -196,7 +151,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  login() {
+  setPassword() {
     if (!this.passwordForm.valid) {
       return;
     }
@@ -209,13 +164,11 @@ export class LoginComponent implements OnInit {
       ...this.passwordForm.value,
     };
 
-    this.api.post('auth/authenticate', data).subscribe(
+    this.api.post('auth/verify-change-password', data).subscribe(
       (response: any) => {
         this.isLoading = false;
         this.stepper.next();
-        window.sessionStorage.setItem('profile', JSON.stringify(response));
-        this.api.reInit();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/login']);
       },
       (error: HttpErrorResponse) => {
         this.isLoading = false;
@@ -230,4 +183,5 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent {
+export class SideNavComponent implements OnInit {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -23,6 +23,12 @@ export class SideNavComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private api: ApiService, private route: Router) {}
 
+  ngOnInit(): void {
+    if(this.profile == null || this.profile == undefined) {
+      this.route.navigate(['/login']); 
+    }
+  }
+
   logout() {
     window.sessionStorage.clear(); 
     this.api.headers = {
@@ -31,7 +37,7 @@ export class SideNavComponent {
         Accept: 'application/json',
       })
     }; 
-     this.route.navigate(['login']); 
+    this.route.navigate(['/login']); 
   }
 
 }

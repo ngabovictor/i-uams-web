@@ -1,0 +1,47 @@
+<div [ngSwitch]="data.type">
+    <div *ngSwitchCase="'profile_photo'">
+        <h2 mat-dialog-title class="color-primary">Update profile photo</h2>
+    </div>
+    <div *ngSwitchCase="'verification'">
+        <h2 mat-dialog-title class="color-primary">Account verification</h2>
+        <p>Account verification is needed for account security</p>
+    </div>
+    <div *ngSwitchDefault></div>
+</div>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="form">
+
+        <div [ngSwitch]="data.type">
+            <div *ngSwitchCase="'profile_photo'">
+
+                
+                <mat-label>Profile photo</mat-label>
+                <br>
+                <input type="file" accept="image/*" formControlName="profile_photo" required (change)="onFileSelectionChange($event)">
+
+            </div>
+
+            <div *ngSwitchCase="'verification'">
+                <mat-form-field appearance="outline">
+                    <mat-label>National ID number</mat-label>
+                    <input matInput type="text" placeholder="119900000000000" formControlName="nid_number" maxlength="16" required>
+                </mat-form-field>
+
+                <br>
+
+                <mat-label>National ID document</mat-label>
+                <br>
+                <input type="file" formControlName="nid_document" required (change)="onFileSelectionChange($event)">
+            </div>
+        </div>
+       
+    </form>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="color-primary" cdkFocusInitial [disabled]="!form.valid" (click)="save()" *ngIf="!isLoading">Save</button>
+  <mat-spinner diameter="40" *ngIf="isLoading"></mat-spinner>
+
+</mat-dialog-actions>

@@ -1,0 +1,42 @@
+<div [ngSwitch]="data.type">
+    <div *ngSwitchCase="'gender'">
+        <h2 mat-dialog-title class="color-primary">Update gender</h2>
+    </div>
+    <div *ngSwitchCase="'nationality'">
+        <h2 mat-dialog-title class="color-primary">Update nationality</h2>
+    </div>
+    <div *ngSwitchCase="'marital_status'">
+        <h2 mat-dialog-title class="color-primary">Update marital status</h2>
+    </div>
+    <div *ngSwitchDefault></div>
+</div>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline" [ngSwitch]="data.type">
+            <mat-select *ngSwitchCase="'gender'" formControlName="gender" required>
+                <mat-option value="MALE">Male</mat-option>
+                <mat-option value="FEMALE">Female</mat-option>
+            </mat-select>
+
+            <mat-select *ngSwitchCase="'marital_status'" formControlName="marital_status" required>
+                <mat-option [value]="'SINGLE'">Single</mat-option>
+                <mat-option [value]="'MARRIED'">Married</mat-option>
+                <mat-option [value]="'DIVORCED'">Divorced</mat-option>
+                <mat-option [value]="'WIDOWED'">Widowed</mat-option>
+            </mat-select>
+
+            <mat-select *ngSwitchCase="'nationality'" formControlName="nationality" required>
+                <mat-option value="{{country.isoCode}}" *ngFor="let country of countries">{{country.name}}</mat-option>
+            </mat-select>
+
+        </mat-form-field>
+    </form>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="color-primary" cdkFocusInitial [disabled]="!form.valid" (click)="save()" *ngIf="!isLoading">Save</button>
+  <mat-spinner diameter="40" *ngIf="isLoading"></mat-spinner>
+
+</mat-dialog-actions>

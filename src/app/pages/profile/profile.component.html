@@ -1,7 +1,8 @@
 <div class="container">
 
     <div fxLayout="row">
-        <div fxFlex="80">
+        <div fxFlex="20" fxFlex.xs="5"></div>
+        <div fxFlex="60" fxFlex.xs="90">
             <div fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="20" fxFlex.xs="10"></div>
                 <div fxFlex="60" fxFlex.xs="90">
@@ -18,7 +19,8 @@
     <br><br>
 
     <div fxLayout="row">
-        <div fxFlex="80">
+        <div fxFlex="20" fxFlex.xs="5"></div>
+        <div fxFlex="60" fxFlex.xs="90">
             <mat-card class="custom-card">
                 <mat-card-header>
                     <mat-card-title class="color-primary">Basic info</mat-card-title>
@@ -33,9 +35,12 @@
                             <span class="color-primary item-name">Photo</span>
                             <mat-line class="color-gray">Profile photo helps you personalize your account</mat-line>
                             <span class="spacer"></span>
-                            <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                            <button mat-icon-button (click)="openFilesDialog(profile, 'profile_photo')" *ngIf="profile.profile_photo == null">
+                                <mat-icon color="primary">account_circle</mat-icon>
                             </button>
+                            <div class="profile-photo-container" *ngIf="profile.profile_photo != null">
+                                <img class="profile-photo" src="{{profile.profile_photo}}" alt="img" (click)="openFilesDialog(profile, 'profile_photo')">
+                            </div>
                         </mat-list-item>
 
                         <br>
@@ -48,8 +53,8 @@
                                 ? profile.first_name : 'Not set'}} {{profile.last_name ? profile.last_name : ''}}
                             </mat-line>
                             <span class="spacer"></span>
-                            <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                            <button mat-icon-button >
+                                <mat-icon color="primary" (click)="openTextDialog(profile, 'name')">edit</mat-icon>
                             </button>
                         </mat-list-item>
 
@@ -61,7 +66,7 @@
                                 profile.birthdate : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openTextDialog(profile, 'birthdate')">edit</mat-icon>
                             </button>
                         </mat-list-item>
 
@@ -73,7 +78,7 @@
                                 profile.gender : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openSelectionDialog(profile, 'gender')">edit</mat-icon>
                             </button>
                         </mat-list-item>
 
@@ -85,7 +90,7 @@
                                 {{profile.marital_status ? profile.marital_status : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openSelectionDialog(profile, 'marital_status')">edit</mat-icon>
                             </button>
                         </mat-list-item>
 
@@ -97,7 +102,7 @@
                                 {{profile.nationality ? profile.nationality : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openSelectionDialog(profile, 'nationality')">edit</mat-icon>
                             </button>
                         </mat-list-item>
                     </mat-list>
@@ -124,7 +129,7 @@
                                 profile.email : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openTextDialog(profile, 'email')">edit</mat-icon>
                             </button>
                         </mat-list-item>
 
@@ -136,7 +141,7 @@
                                 {{profile.phone_number ? profile.phone_number : 'Not set'}}</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openTextDialog(profile, 'phone_number')">edit</mat-icon>
                             </button>
                         </mat-list-item>
                     </mat-list>
@@ -172,8 +177,8 @@
                                     </p>
                                 </div>
                                 <div *ngSwitchDefault>
-                                    <p [align]="'center'">
-                                        <mat-icon class="color-warn">
+                                    <p [align]="'center'" class="color-warn">
+                                        <mat-icon>
                                             highlight_off</mat-icon>
                                         <br>
                                         Your account is not verified
@@ -185,7 +190,7 @@
 
                         <mat-card-actions *ngIf="profile.verification_status == 'UNVERIFIED'">
                             <mat-divider></mat-divider>
-                            <button mat-button class="color-primary action-btn">Start account verification</button>
+                            <button mat-button class="color-primary action-btn" (click)="openFilesDialog(profile, 'verification')">Start account verification</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -208,7 +213,7 @@
 
                         <mat-card-actions *ngIf="!profile.is_email_verified">
                             <mat-divider></mat-divider>
-                            <button mat-button class="color-primary action-btn">Verifiy your email</button>
+                            <button mat-button class="color-primary action-btn" (click)="openEmailVerificationDialog()">Verifiy your email</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -245,7 +250,7 @@
                             <mat-line class="item-value">********</mat-line>
                             <span class="spacer"></span>
                             <button mat-icon-button>
-                                <mat-icon color="primary">edit</mat-icon>
+                                <mat-icon color="primary" (click)="openPasswordChangeDialog()">edit</mat-icon>
                             </button>
                         </mat-list-item>
                     </mat-list>

@@ -1,0 +1,65 @@
+<div [ngSwitch]="data.type">
+    <div *ngSwitchCase="'name'">
+        <h2 mat-dialog-title class="color-primary">Update name</h2>
+    </div>
+    <div *ngSwitchCase="'email'">
+        <h2 mat-dialog-title class="color-primary">Update email address</h2>
+    </div>
+    <div *ngSwitchCase="'phone_number'">
+        <h2 mat-dialog-title class="color-primary">Update phone number</h2>
+    </div>
+
+    <div *ngSwitchCase="'birthdate'">
+        <h2 mat-dialog-title class="color-primary">Update date of birth</h2>
+    </div>
+    <div *ngSwitchDefault></div>
+</div>
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]="form">
+
+        <div [ngSwitch]="data.type">
+            <div *ngSwitchCase="'name'">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>First name</mat-label>
+                    <input matInput type="text" placeholder="John" formControlName="first_name" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last name</mat-label>
+                    <input matInput type="text" placeholder="Doe" formControlName="last_name" required>
+                </mat-form-field>
+
+                
+            </div>
+
+            <mat-form-field appearance="outline" *ngSwitchCase="'phone_number'">
+                <mat-label>Phone number</mat-label>
+                <input matInput type="tel" placeholder="+2507XXXXXXXX" formControlName="phone_number" required>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" *ngSwitchCase="'email'">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="john.doe@uams.com" formControlName="email" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngSwitchCase="'birthdate'">
+                <mat-label>Birthdate</mat-label>
+                <input matInput placeholder="10/31/2000" formControlName="birthdate" [matDatepicker]="picker" required readonly>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+       
+    </form>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="color-primary" cdkFocusInitial [disabled]="!form.valid" (click)="save()" *ngIf="!isLoading">Save</button>
+  <mat-spinner diameter="40" *ngIf="isLoading"></mat-spinner>
+
+</mat-dialog-actions>

@@ -71,7 +71,7 @@
                                 </mat-form-field>
                               </form>
         
-                              <button mat-button class="forgot-btn color-warn" [disabled]="isLoading">
+                              <button mat-button class="forgot-btn color-warn" [disabled]="isLoading" routerLink="/reset-password">
                                 Forgot password?
                               </button>
                         </mat-step>
@@ -146,7 +146,7 @@
       <div class="footer-container">
         <p class="copyright-text">
           &copy;UAMS {{ today.getFullYear() }}
-          <a href="#" target="_tab" class="root">Powered by<b> Victor NH</b> </a>
+          <a routerLink="/register" class="root">Create account now </a>
         </p>
       </div>
     </div>
